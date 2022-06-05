@@ -1,0 +1,111 @@
+.header {
+    position: relative;
+    background: rgba(0, 0, 0, 0.85);
+    height: 86px;
+    width: 100%;
+    position: fixed;
+    z-index: 2;
+    left: 0;
+    right: 0;
+    top: 0;
+    transition: 1s all;
+    &__logo {
+        position: absolute;
+        top: 10px;
+        width: 150px;
+    }
+    &__img {
+        width: 100%;
+    }
+    &__grid {
+        display: grid;
+        padding-left: 180px;
+        grid-template-columns: repeat(2, auto);
+        grid-template-rows: 86px;
+        gap: 15px;
+        align-items: center;
+        nav ul {
+            margin: 0;
+        }
+    }
+    &__menu {
+        list-style-type: none;
+        width: 810px;
+        display: flex;
+        justify-content: space-between;
+        &__link {
+            position: relative;
+            font-size: 16px;
+            color: #fff;
+            &::after {
+                content: '';
+                display: block;
+                border-bottom: 2px solid red;
+                width: 0;
+                left: 0;
+                position: absolute;
+                transition: all ease-in-out .3s;
+            }
+            &:hover {
+                text-decoration: none;
+                color: #fff;
+                &::after {
+                    width: 100%;
+                }
+            }
+        }
+    }
+    &__lang {
+        justify-self: end;
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        gap: 15px;
+        align-items: center;
+        &__item {
+            width: 28px;
+            height: 28px;
+            a {
+                display: block;
+                text-align: center;
+                margin-top: 3px;
+            }
+            &_active {
+                border-radius: 10%;
+                background: #fff;
+                .header__lang__link {
+                    text-decoration: none;
+                    color: #000;
+                }
+                &:hover {
+                    .header__lang__link {
+                        text-decoration: none;
+                        color: #000;
+                    }
+                }
+            }
+        }
+        &__link {
+            font-size: 16px;
+            color: #fff;
+            &:hover {
+                text-decoration: none;
+                color: #fff;
+            }
+        }
+    }
+}
+
+.header.out {
+	transform: translateY(-200%);
+    transition: 1s all;
+}
+
+#header_space-false {
+    height: 86px;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    top: 0;
+}

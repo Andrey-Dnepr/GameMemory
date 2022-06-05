@@ -1,0 +1,22 @@
+@import 'libs/bootstrap-reboot.min';
+@import 'libs/fonts';
+@import 'libs/icon-style';
+
+
+* {
+    font-family: 'GothamPro-Light', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 1140px;
+    margin: 0 auto;
+}
+
+@import 'blocks/header';
+@import 'blocks/pageup';
+@import 'blocks/promo';
+@import 'blocks/footer';
+
+// @import 'base/media';   // Чтоб файл медиа (адаптация под разные экраны) работал корректно, его необходимо подключать в стили самым последним
