@@ -16,6 +16,17 @@
     }
     &__img {
         width: 100%;
+        &_main {
+            &.active {
+                display: none;
+            }
+        }
+        &_ua {
+            display: none;
+            &.active {
+                display: block;
+            }
+        }
     }
     &__grid {
         display: grid;

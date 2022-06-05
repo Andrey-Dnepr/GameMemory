@@ -1,7 +1,11 @@
 @import 'libs/bootstrap-reboot.min';
 @import 'libs/fonts';
 @import 'libs/icon-style';
+@import 'libs/animate';
 
+html {
+    scroll-behavior: smooth; //включает плавный скролинг для сайта, когда переходишь по ссылкам на странице к какимто секциям
+}
 
 * {
     font-family: 'GothamPro-Light', sans-serif;
