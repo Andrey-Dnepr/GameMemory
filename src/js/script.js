@@ -2,8 +2,8 @@ $(document).ready(function(){
     var header = $('.header');
 	const mouseTarget = document.getElementById('header_space-false'), //получаем элемент по ID
 		mouseTargetOut = document.getElementById('header_space-true'), //получаем элемент по ID
-		logoMain = document.querySelector('.header__img_main'),
-      	logoUa = document.querySelector('.header__img_ua');
+		logoMain = document.querySelector('.header__img_main'), //получаем элемент по селектору класса
+      	logoUa = document.querySelector('.header__img_ua'); //получаем элемент по селектору класса
 
 	// следим, когда мышка попадет в определенную зону и убираем класс out, тоесть появляется МЕНЮ
 	mouseTarget.addEventListener('mouseenter', function() {
@@ -17,12 +17,14 @@ $(document).ready(function(){
 		}
 	});
 
+	// следим, когда мышка попадет в определенную зону (Логотип) и дабавляем класс active в две картинки с лого, в классах active прописанно для одной картинки display: none, для другой block. Тоесть одна появляется, а другая исчезает.
 	logoMain.addEventListener('mouseenter', () => {
 		logoMain.classList.add('active');
 		logoUa.classList.add('active');
 	
 	});
 	
+	// следим, когда мышка покидает определенную зону (Логотип) и дабавляем класс active в две картинки с лого, в классах active прописанно для одной картинки display: none, для другой block. Тоесть одна появляется, а другая исчезает.
 	logoMain.addEventListener('mouseleave', () => {
 		logoMain.classList.remove('active');
 		logoUa.classList.remove('active');
@@ -49,10 +51,6 @@ $(document).ready(function(){
 		}
 
 	});
-
-	//медленный скроллинг на верх
-	new WOW().init();
-
 	
 	//добавляем класс (задний фон) к активному языку и удаляем класс у не активного
 	$('div.header__lang').on('click', 'div:not(.header__lang__item_active)', function() {
