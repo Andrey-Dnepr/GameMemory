@@ -57,4 +57,22 @@ $(document).ready(function(){
         $(this).addClass('header__lang__item_active').siblings().removeClass('header__lang__item_active');
       });
 
+	$('.promo__slider').slick({
+		autoplay: true,
+		autoplaySpeed: 3000,
+		pauseOnFocus: false,
+		prevArrow: '<button type="button" class="slick-prev"><img src="img/left-arr.png"></button>',
+        nextArrow: '<button type="button" class="slick-next"><img src="img/right-arr.png"></button>',
+        responsive: [
+            {
+                breakpoint: 768,
+                settings: {
+                    dots: true,
+                    arrows: false
+                    
+                }
+            }
+        ]
+	});
+	    
 });
