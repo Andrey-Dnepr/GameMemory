@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			numbersLine.push(i);
 			numbersLine.push(i);
 		};
-		// цикл для присваивания дата атрибута number
+		// цикл для присваивания дата атрибута number и isOpen
 		playCard.forEach(item => {
 			while (!item.dataset.number) {
 				//генерируем случайное число от 0 до длины массива numbersLine (не влючительно) 
@@ -41,47 +41,39 @@ document.addEventListener('DOMContentLoaded', () => {
 				item.dataset.number = numbersLine[someIndex]; //присваиваем дата атрибуту "number" цифру из массива по сгенерированному случайному индексу
 				item.dataset.isOpen = 'false'; //присваиваем дата атрибуту "isOpen" значение false (это будет флаг для статуса карты на поле - открыта или нет)
 				numbersLine.splice(someIndex, 1); //удаляем использованную цифру из массива
-				console.log(numbersLine);
 			}
-			console.log(item.dataset.number);
 		});			
-		playCard.forEach(item => {
-			item.addEventListener('click', (eventNew) => {
-				if (numbersLine.length === 0) {
-					if (eventNew.currentTarget.dataset.isOpen == 'false') {
-						eventNew.currentTarget.innerHTML = `
-							<img class="play__card__img" src="../../img/${eventNew.currentTarget.dataset.number}.jpeg" alt="img${eventNew.currentTarget.dataset.number}">
-						`;
-						eventNew.currentTarget.dataset.isOpen = 'true';
-						numbersLine.push(eventNew.currentTarget.dataset.number);
-						console.log(numbersLine);
-					};
-				} else {
-					if (eventNew.currentTarget.dataset.isOpen == 'false') {
-						eventNew.currentTarget.innerHTML = `
-							<img class="play__card__img" src="../../img/${eventNew.currentTarget.dataset.number}.jpeg" alt="img${eventNew.currentTarget.dataset.number}">
-						`;
-						//вставить тайм аут
-						if (eventNew.currentTarget.dataset.number == numbersLine[0]) {
-							eventNew.currentTarget.dataset.isOpen = 'true';
-							numbersLine = [];
-							console.log(numbersLine);
-						} else {
-							eventNew.currentTarget.innerHTML = '';
-							eventNew.currentTarget.dataset.isOpen = 'false';
-							playCard.forEach((cardItem) => {
-								if (cardItem.dataset.number == numbersLine[0]) {
-									cardItem.innerHTML = '';
-									cardItem.dataset.isOpen = 'false';
-									numbersLine = [];
-									console.log(numbersLine);
-								};
-							});
-						};
-					};
-				};
-
-			});
+		playSection.addEventListener('click', (event) => {
+			if (numbersLine.length === 0) {
+				if (event.target.dataset.isOpen == 'false') {
+					event.target.innerHTML = `
+						<img class="play__card__img" src="../../img/${event.target.dataset.number}.jpeg" alt="img${event.target.dataset.number}">
+					`;
+					event.target.dataset.isOpen = 'true';
+					numbersLine.push(event.target.dataset.number);
+				}
+			} else {
+				if (event.target.dataset.isOpen == 'false') {
+					event.target.innerHTML = `
+						<img class="play__card__img" src="../../img/${event.target.dataset.number}.jpeg" alt="img${event.target.dataset.number}">
+					`;
+					//вставить тайм аут
+					if (event.target.dataset.number == numbersLine[0]) {
+						event.target.dataset.isOpen = 'true';
+						numbersLine = [];
+					} else {
+						event.target.innerHTML = '';
+						event.target.dataset.isOpen = 'false';
+						playCard.forEach((cardItem) => {
+							if (cardItem.dataset.number == numbersLine[0]) {
+								cardItem.innerHTML = '';
+								cardItem.dataset.isOpen = 'false';
+								numbersLine = [];
+							}
+						})
+					}
+				}
+			}
 		});
 	});
 });
