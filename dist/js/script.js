@@ -57,21 +57,22 @@ document.addEventListener('DOMContentLoaded', () => {
 					event.target.innerHTML = `
 						<img class="play__card__img" src="../../img/${event.target.dataset.number}.jpeg" alt="img${event.target.dataset.number}">
 					`;
-					//вставить тайм аут
-					if (event.target.dataset.number == numbersLine[0]) {
-						event.target.dataset.isOpen = 'true';
-						numbersLine = [];
-					} else {
-						event.target.innerHTML = '';
-						event.target.dataset.isOpen = 'false';
-						playCard.forEach((cardItem) => {
-							if (cardItem.dataset.number == numbersLine[0]) {
-								cardItem.innerHTML = '';
-								cardItem.dataset.isOpen = 'false';
-								numbersLine = [];
-							}
-						})
-					}
+					setTimeout(() => {
+						if (event.target.dataset.number == numbersLine[0]) {
+							event.target.dataset.isOpen = 'true';
+							numbersLine = [];
+						} else {
+							event.target.innerHTML = '';
+							event.target.dataset.isOpen = 'false';
+							playCard.forEach((cardItem) => {
+								if (cardItem.dataset.number == numbersLine[0]) {
+									cardItem.innerHTML = '';
+									cardItem.dataset.isOpen = 'false';
+									numbersLine = [];
+								}
+							})
+						}
+					}, 900)
 				}
 			}
 		});
