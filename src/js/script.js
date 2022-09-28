@@ -1,78 +1,87 @@
-$(document).ready(function(){
-    var header = $('.header');
-	const mouseTarget = document.getElementById('header_space-false'), //получаем элемент по ID
-		mouseTargetOut = document.getElementById('header_space-true'), //получаем элемент по ID
-		logoMain = document.querySelector('.header__img_main'), //получаем элемент по селектору класса
-      	logoUa = document.querySelector('.header__img_ua'); //получаем элемент по селектору класса
+document.addEventListener('DOMContentLoaded', () => {
 
-	// следим, когда мышка попадет в определенную зону и убираем класс out, тоесть появляется МЕНЮ
-	mouseTarget.addEventListener('mouseenter', function() {
-		header.removeClass('out');
-	});
+    const submit = document.querySelector('.header__menu__btn'),
+		  checkLevel = document.querySelectorAll('.header__menu__level'),
+		  playSection = document.querySelector('.play__zone'),
+		  headerMenu = document.querySelector('.header__menu');
 
-	// следим, когда мышка покидает определенную зону и при этом, экран должен быть прокручен на 300 ед. (для того чтоб меню не убиралось на стартовой странице) и добавляем класс out, тоесть МЕНЮ исчезает. Иначе меню остается на месте.
-	mouseTargetOut.addEventListener('mouseleave', function() {
-		if ( $(window).scrollTop() > 300 ) {
-			header.addClass('out');
-		}
-	});
-
-	// следим, когда мышка попадет в определенную зону (Логотип) и дабавляем класс active в две картинки с лого, в классах active прописанно для одной картинки display: none, для другой block. Тоесть одна появляется, а другая исчезает.
-	logoMain.addEventListener('mouseenter', () => {
-		logoMain.classList.add('active');
-		logoUa.classList.add('active');
-	
-	});
-	
-	// следим, когда мышка покидает определенную зону (Логотип) и дабавляем класс active в две картинки с лого, в классах active прописанно для одной картинки display: none, для другой block. Тоесть одна появляется, а другая исчезает.
-	logoMain.addEventListener('mouseleave', () => {
-		logoMain.classList.remove('active');
-		logoUa.classList.remove('active');
-	});
-
-	//Если экран прокручен на 300 ед., то меню исчезает
-	$(window).scroll(function() {
-		var scrolled = $(window).scrollTop();
-	
-		if ( scrolled > 300 ) {
-			header.addClass('out');
-		} else {
-			header.removeClass('out');
-		}
-
-	});
-
-	//Когда экран прокручен на 1200 ед. появляется стрелка с быстрым возвратом на верх
-	$(window).scroll(function() {
-		if ($(this).scrollTop() > 1200) {
-			$('.pageup').fadeIn();
-		} else {
-			$('.pageup').fadeOut();
-		}
-
+	checkLevel.forEach(item => {
+		item.addEventListener('click', (itemNew) => {
+			playSection.innerHTML = '';
+			for (i = 1; i <= itemNew.currentTarget.dataset.skill; i++) {
+				playSection.innerHTML += `
+					<div class="play__card"></div>
+					<div class="play__card"></div>
+					<div class="play__card"></div>
+					<div class="play__card"></div>
+					<div class="play__card"></div>
+					<div class="play__card"></div>
+					<div class="play__card"></div>
+					<div class="play__card"></div>
+					`;
+				}
+		})
 	});
 	
-	//добавляем класс (задний фон) к активному языку и удаляем класс у не активного
-	$('div.header__lang').on('click', 'div:not(.header__lang__item_active)', function() {
-        $(this).addClass('header__lang__item_active').siblings().removeClass('header__lang__item_active');
-      });
+	let numbersLine = []; //переменная для хранения количества парных карт и в цикле игры записываем сюда открытые карты
+	//запуск игры
+	submit.addEventListener('click', (event) => {
+		headerMenu.style.display = 'none';
+		playCard = document.querySelectorAll('.play__card');
+		//генерируем набор цифр для карт, учитывая выбранный тип игры
+		for (let i = 1; i <= playCard.length/2; i++) {
+			numbersLine.push(i);
+			numbersLine.push(i);
+		};
+		// цикл для присваивания дата атрибута number
+		playCard.forEach(item => {
+			while (!item.dataset.number) {
+				//генерируем случайное число от 0 до длины массива numbersLine (не влючительно) 
+				let someIndex = Math.floor(Math.random() * numbersLine.length);
+				item.dataset.number = numbersLine[someIndex]; //присваиваем дата атрибуту "number" цифру из массива по сгенерированному случайному индексу
+				item.dataset.isOpen = 'false'; //присваиваем дата атрибуту "isOpen" значение false (это будет флаг для статуса карты на поле - открыта или нет)
+				numbersLine.splice(someIndex, 1); //удаляем использованную цифру из массива
+				console.log(numbersLine);
+			}
+			console.log(item.dataset.number);
+		});			
+		playCard.forEach(item => {
+			item.addEventListener('click', (eventNew) => {
+				if (numbersLine.length === 0) {
+					if (eventNew.currentTarget.dataset.isOpen == 'false') {
+						eventNew.currentTarget.innerHTML = `
+							<img class="play__card__img" src="../../img/${eventNew.currentTarget.dataset.number}.jpeg" alt="img${eventNew.currentTarget.dataset.number}">
+						`;
+						eventNew.currentTarget.dataset.isOpen = 'true';
+						numbersLine.push(eventNew.currentTarget.dataset.number);
+						console.log(numbersLine);
+					};
+				} else {
+					if (eventNew.currentTarget.dataset.isOpen == 'false') {
+						eventNew.currentTarget.innerHTML = `
+							<img class="play__card__img" src="../../img/${eventNew.currentTarget.dataset.number}.jpeg" alt="img${eventNew.currentTarget.dataset.number}">
+						`;
+						//вставить тайм аут
+						if (eventNew.currentTarget.dataset.number == numbersLine[0]) {
+							eventNew.currentTarget.dataset.isOpen = 'true';
+							numbersLine = [];
+							console.log(numbersLine);
+						} else {
+							eventNew.currentTarget.innerHTML = '';
+							eventNew.currentTarget.dataset.isOpen = 'false';
+							playCard.forEach((cardItem) => {
+								if (cardItem.dataset.number == numbersLine[0]) {
+									cardItem.innerHTML = '';
+									cardItem.dataset.isOpen = 'false';
+									numbersLine = [];
+									console.log(numbersLine);
+								};
+							});
+						};
+					};
+				};
 
-	$('.promo__slider').slick({
-		autoplay: true,
-		autoplaySpeed: 3000,
-		pauseOnFocus: false,
-		prevArrow: '<button type="button" class="slick-prev"><img src="img/left-arr.png"></button>',
-        nextArrow: '<button type="button" class="slick-next"><img src="img/right-arr.png"></button>',
-        responsive: [
-            {
-                breakpoint: 768,
-                settings: {
-                    dots: true,
-                    arrows: false
-                    
-                }
-            }
-        ]
+			});
+		});
 	});
-	    
 });
