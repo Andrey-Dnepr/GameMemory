@@ -3,21 +3,31 @@
     background-color: bisque;
     padding-top: 20px;
     &__menu {
+        &__title {
+            margin: 0 auto;
+            text-align: center;
+        }
+        &__descr {
+            margin: 0 auto;
+            text-align: center;
+        }
         &__level {
             background-color: aqua;
             &:hover {
                 cursor: pointer;
             }
         }
-    }
-    .title__wrapper {
-        display: flex;
-        justify-content: start;
-        gap: 20px;
+        &__btn {
+            display: none;
+        }
     }
     .skill__wrapper {
         display: flex;
-        justify-content: start;
+        justify-content: center;
         gap: 20px;
+    }
+    .game__menu {
+        display: none;
+
     }
 }

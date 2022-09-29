@@ -1,10 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    const submit = document.querySelector('.header__menu__btn'),
+    const playBtn = document.querySelector('.header__menu__btn'),
 		  checkLevel = document.querySelectorAll('.header__menu__level'),
 		  playSection = document.querySelector('.play__zone'),
-		  headerMenu = document.querySelector('.header__menu');
-
+		  winSection = document.querySelector('.play__win'),
+		  headerMenu = document.querySelector('.header__menu'),
+		  gameMenu = document.querySelector('.game__menu'),
+		  restartBtn = document.querySelector('.game__menu__btn');
+		  
+	let	numbersLine = [], //переменная для хранения количества парных карт и в цикле игры записываем сюда открытые карты
+		numbersCard = {}, //переменная для хранения открытой карты
+		countMistakes = 0,
+		countOpenCards = 0, 
+		statusIteration = 'true'; //переменная отслеживающая, завершился ли ход, иначе новые карточки не открываются
+	
+	// отображение поля с картами, в зависимости от выбранной сложности
 	checkLevel.forEach(item => {
 		item.addEventListener('click', (itemNew) => {
 			playSection.innerHTML = '';
@@ -20,32 +30,48 @@ document.addEventListener('DOMContentLoaded', () => {
 					<div class="play__card"></div>
 					`;
 				}
+			playBtn.style.display = 'block';
 		})
 	});
-	
-	let numbersLine = [], //переменная для хранения количества парных карт и в цикле игры записываем сюда открытые карты
-		numbersCard = {};
+		
 	//запуск игры
-	submit.addEventListener('click', (event) => {
+	playBtn.addEventListener('click', () => {
 		headerMenu.style.display = 'none';
-		playCard = document.querySelectorAll('.play__card');
+		gameMenu.style.display = 'block';
+		restartBtn.addEventListener('click', () => {location.reload()});
+		let playCard = document.querySelectorAll('.play__card');
+
 		//генерируем набор цифр для карт, учитывая выбранный тип игры
 		for (let i = 1; i <= playCard.length/2; i++) {
 			numbersLine.push(i);
 			numbersLine.push(i);
 		};
+
 		// цикл для присваивания дата атрибута number и open
 		playCard.forEach(item => {
 			while (!item.dataset.number) {
-				//генерируем случайное число от 0 до длины массива numbersLine (не влючительно) 
-				let someIndex = Math.floor(Math.random() * numbersLine.length);
+				let someIndex = Math.floor(Math.random() * numbersLine.length); //генерируем случайное число от 0 до длины массива numbersLine (не влючительно) 
 				item.dataset.number = numbersLine[someIndex]; //присваиваем дата атрибуту "number" цифру из массива по сгенерированному случайному индексу
 				item.dataset.open = 'false'; //присваиваем дата атрибуту "open" значение false (это будет флаг для статуса карты на поле - открыта или нет)
 				numbersLine.splice(someIndex, 1); //удаляем использованную цифру из массива
 			}
-		});			
+		});
+
+		// показываем изображения на 4 секунды
+		playCard.forEach(item => {
+			item.innerHTML = `
+				<img class="play__card__img" src="../../img/${item.dataset.number}.jpeg" alt="img${item.dataset.number}">
+			`;
+		});
+		setTimeout(() => {
+			playCard.forEach(item => {
+				item.innerHTML = '';
+			});
+		}, 4000);
+
+		//алгоритм игры
 		playSection.addEventListener('click', (event) => {
-			if (numbersLine.length === 0) {
+			if (numbersLine.length === 0 && statusIteration === 'true') {
 				if (event.target.dataset.open == 'false') {
 					event.target.innerHTML = `
 						<img class="play__card__img" src="../../img/${event.target.dataset.number}.jpeg" alt="img${event.target.dataset.number}">
@@ -55,15 +81,23 @@ document.addEventListener('DOMContentLoaded', () => {
 					numbersCard = event.target;
 				}
 			} else {
-				if (event.target.dataset.open == 'false') {
+				if (event.target.dataset.open == 'false' && statusIteration === 'true') {
+					statusIteration = 'false';
 					event.target.innerHTML = `
 						<img class="play__card__img" src="../../img/${event.target.dataset.number}.jpeg" alt="img${event.target.dataset.number}">
 					`;
 					setTimeout(() => {
 						if (event.target.dataset.number == numbersLine[0]) {
 							event.target.dataset.open = 'true';
+							countOpenCards += 2;
 							numbersLine = [];
 							numbersCard = {};
+							statusIteration = 'true';
+							if (countOpenCards === playSection.children.length) {
+								playSection.style.display = 'none';
+								winSection.style.display = 'block';
+								winSection.innerHTML = 'ПОБЕДА !!!';
+							}
 						} else {
 							event.target.innerHTML = '';
 							event.target.dataset.open = 'false';
@@ -71,17 +105,13 @@ document.addEventListener('DOMContentLoaded', () => {
 							numbersCard.dataset.open = 'false';
 							numbersCard = {};
 							numbersLine = [];
-							// event.target.parentElement.children.forEach(cardItem => { // это блок работает с ошибкой
-							// 	if (cardItem.dataset.number == numbersLine[0]) {
-							// 		cardItem.innerHTML = '';
-							// 		cardItem.dataset.open = 'false';
-							// 		numbersLine = [];
-							// 	}
-							// })
+							countMistakes += 1;
+							gameMenu.children[0].innerHTML = `Количество ошибок: ${countMistakes}`; //добавить илюстрацию с изменением картинки, чем больше ошибок тем хуже смайл, сделать максимальное возможное количество ошибок, после которого игра заканчивается.
+							statusIteration = 'true';
 						}
 					}, 900)
 				}
 			}
-		});
-	});
+		})
+	})
 });
