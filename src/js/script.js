@@ -12,22 +12,54 @@ document.addEventListener('DOMContentLoaded', () => {
 		numbersCard = {}, //переменная для хранения открытой карты
 		countMistakes = 0,
 		countOpenCards = 0, 
-		statusIteration = 'true'; //переменная отслеживающая, завершился ли ход, иначе новые карточки не открываются
-	
+		statusIteration = 'true', //переменная отслеживающая, завершился ли ход, иначе новые карточки не открываются
+		itemsSkin = document.querySelector('.game__skin__item'),
+		pathSkin = 'img/skin_1/',
+		classSkin = 'play__marvel',
+		selectedLevel = 2;
+
+	// отслеживаем выбор скина
+	headerMenu.addEventListener('click', (skillItem) => {
+		if (skillItem.target.parentElement !== itemsSkin && skillItem.target.parentElement.classList.contains('game__skin__item')) {
+			skillItem.target.parentElement.classList.add('skin__selected');
+			pathSkin = skillItem.target.parentElement.dataset.source;
+			classSkin = skillItem.target.parentElement.dataset.class;
+			itemsSkin.classList.remove('skin__selected');
+			itemsSkin = skillItem.target.parentElement
+			if (playSection.innerHTML !== '') {
+				playSection.innerHTML = '';
+				for (i = 1; i <= selectedLevel; i++) {
+					playSection.innerHTML += `
+						<div class="play__card ${classSkin}"></div>
+						<div class="play__card ${classSkin}"></div>
+						<div class="play__card ${classSkin}"></div>
+						<div class="play__card ${classSkin}"></div>
+						<div class="play__card ${classSkin}"></div>
+						<div class="play__card ${classSkin}"></div>
+						<div class="play__card ${classSkin}"></div>
+						<div class="play__card ${classSkin}"></div>
+						`;
+				}
+			}
+		}
+	});
+
+
 	// отображение поля с картами, в зависимости от выбранной сложности
 	checkLevel.forEach(item => {
 		item.addEventListener('click', (itemNew) => {
+			selectedLevel = itemNew.currentTarget.dataset.skill;
 			playSection.innerHTML = '';
-			for (i = 1; i <= itemNew.currentTarget.dataset.skill; i++) {
+			for (i = 1; i <= selectedLevel; i++) {
 				playSection.innerHTML += `
-					<div class="play__card"></div>
-					<div class="play__card"></div>
-					<div class="play__card"></div>
-					<div class="play__card"></div>
-					<div class="play__card"></div>
-					<div class="play__card"></div>
-					<div class="play__card"></div>
-					<div class="play__card"></div>
+					<div class="play__card ${classSkin}"></div>
+					<div class="play__card ${classSkin}"></div>
+					<div class="play__card ${classSkin}"></div>
+					<div class="play__card ${classSkin}"></div>
+					<div class="play__card ${classSkin}"></div>
+					<div class="play__card ${classSkin}"></div>
+					<div class="play__card ${classSkin}"></div>
+					<div class="play__card ${classSkin}"></div>
 					`;
 				}
 			playBtn.style.display = 'block';
@@ -60,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		// показываем изображения на 4 секунды
 		playCard.forEach(item => {
 			item.innerHTML = `
-				<img class="play__card__img" src="../../img/${item.dataset.number}.jpeg" alt="img${item.dataset.number}">
+				<img class="play__card__img" src="../../${pathSkin}${item.dataset.number}.png" alt="img${item.dataset.number}">
 			`;
 		});
 		setTimeout(() => {
@@ -74,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			if (numbersLine.length === 0 && statusIteration === 'true') {
 				if (event.target.dataset.open == 'false') {
 					event.target.innerHTML = `
-						<img class="play__card__img" src="../../img/${event.target.dataset.number}.jpeg" alt="img${event.target.dataset.number}">
+						<img class="play__card__img" src="../../${pathSkin}${event.target.dataset.number}.png" alt="img${event.target.dataset.number}">
 					`;
 					event.target.dataset.open = 'true';
 					numbersLine.push(event.target.dataset.number);
@@ -84,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				if (event.target.dataset.open == 'false' && statusIteration === 'true') {
 					statusIteration = 'false';
 					event.target.innerHTML = `
-						<img class="play__card__img" src="../../img/${event.target.dataset.number}.jpeg" alt="img${event.target.dataset.number}">
+						<img class="play__card__img" src="../../${pathSkin}${event.target.dataset.number}.png" alt="img${event.target.dataset.number}">
 					`;
 					setTimeout(() => {
 						if (event.target.dataset.number == numbersLine[0]) {

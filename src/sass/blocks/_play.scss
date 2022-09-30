@@ -10,13 +10,13 @@
     &__card {
         width: 100px;
         height: 149px;
-        background: url('../../img/card_back.png');
+        // background: url('../../img/skin_1/back.png');
         border-radius: 7%;
         transition: all 0.3s;
         &:hover {
             transition: all 0.2s;
             cursor: pointer;
-            background: url('../../img/card_back2.png');
+            // background: url('../../img/skin_1/back1.png');
             scale: 105%;
         }
         &__img {
@@ -27,5 +27,29 @@
     }
     &__win {
         display: none;
+    }
+    &__marvel {
+        background: url('../../img/skin_1/back.png');
+        &:hover {
+            background: url('../../img/skin_1/back1.png');
+        }    
+    }
+    &__lego {
+        background: url('../../img/skin_2/back.png');
+        &:hover {
+            background: url('../../img/skin_2/back1.png');
+        }    
+    }
+    &__harry {
+        background: url('../../img/skin_3/back.png');
+        &:hover {
+            background: url('../../img/skin_3/back1.png');
+        }    
+    }
+    &__starwars {
+        background: url('../../img/skin_4/back.png');
+        &:hover {
+            background: url('../../img/skin_4/back1.png');
+        }    
     }
 }
