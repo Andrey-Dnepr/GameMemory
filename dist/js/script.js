@@ -6,7 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
 		  winSection = document.querySelector('.play__win'),
 		  headerMenu = document.querySelector('.header__menu'),
 		  gameMenu = document.querySelector('.game__menu'),
-		  restartBtn = document.querySelector('.game__menu__btn');
+		  restartBtn = document.querySelector('.game__menu__btn'),
+		  startTitle = document.querySelector('.start_title');
 		  
 	let	numbersLine = [], //переменная для хранения количества парных карт и в цикле игры записываем сюда открытые карты
 		numbersCard = {}, //переменная для хранения открытой карты
@@ -48,6 +49,15 @@ document.addEventListener('DOMContentLoaded', () => {
 	// отображение поля с картами, в зависимости от выбранной сложности
 	checkLevel.forEach(item => {
 		item.addEventListener('click', (itemNew) => {
+			startTitle.style.display = 'none';
+			if (itemNew.currentTarget === checkLevel[0]) {
+				itemNew.currentTarget.style.background = "url('img/easy1.svg')";
+				checkLevel[1].style.background = "url('img/hard.svg')";
+			}
+			if (itemNew.currentTarget === checkLevel[1]) {
+				itemNew.currentTarget.style.background = "url('img/hard1.svg')";
+				checkLevel[0].style.background = "url('img/easy.svg')";
+			}
 			selectedLevel = itemNew.currentTarget.dataset.skill;
 			playSection.innerHTML = '';
 			for (i = 1; i <= selectedLevel; i++) {
@@ -128,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
 							if (countOpenCards === playSection.children.length) {
 								playSection.style.display = 'none';
 								winSection.style.display = 'block';
-								winSection.innerHTML = 'ПОБЕДА !!!';
+								// winSection.innerHTML = 'ПОБЕДА !!!';
 							}
 						} else {
 							event.target.innerHTML = '';
@@ -138,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
 							numbersCard = {};
 							numbersLine = [];
 							countMistakes += 1;
-							gameMenu.children[0].innerHTML = `Количество ошибок: ${countMistakes}`; //добавить илюстрацию с изменением картинки, чем больше ошибок тем хуже смайл, сделать максимальное возможное количество ошибок, после которого игра заканчивается.
+							gameMenu.children[1].innerHTML = ` ${countMistakes}`; //добавить илюстрацию с изменением картинки, чем больше ошибок тем хуже смайл, сделать максимальное возможное количество ошибок, после которого игра заканчивается.
 							statusIteration = 'true';
 						}
 					}, 900)

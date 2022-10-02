@@ -1,9 +1,8 @@
 .header {
     height: 120px;
-    background-color: rgb(40, 39, 38);
+    background-color: rgb(40, 39, 38, 0.5);
     padding: 20px 0 20px;
     &__menu {
-        color: antiquewhite;
         display: grid;
         justify-content: center;
         justify-items: center;
@@ -15,36 +14,86 @@
             margin: 0 auto;
             text-align: center;
         }
-        &__descr {
-            margin: 0 auto;
-            text-align: center;
-        }
         &__level {
-            background-color: rgb(80, 84, 84);
             &:hover {
                 cursor: pointer;
             }
         }
         &__btn {
             display: none;
+            transition: all 0.3s;
+            &:hover {
+                cursor: pointer;
+                scale: 105%;
+                transition: all 0.3s;
+            }
+        }
+    }
+    .easy {
+        width: 42.34px;
+        height: 15px;
+        background: url('../../img/easy.svg');
+        transition: all 0.3s;
+        &:hover {
+            background: url('../../img/easy1.svg');
+            scale: 105%;
+            transition: all 0.3s;
+        }
+    }
+    .hard {
+        width: 52.08px;
+        height: 15px;
+        background: url('../../img/hard.svg');
+        transition: all 0.3s;
+        &:hover {
+            background: url('../../img/hard1.svg');
+            scale: 105%;
+            transition: all 0.3s;
+        }
+    }
+    .play {
+        padding-top: 0px;
+        width: 43.42px;
+        height: 15px;
+        background: url('../../img/play.svg');
+        animation-name: playbeat;
+        animation-duration: 1.2s;
+        animation-timing-function: ease;
+        animation-iteration-count: infinite;
+        &:hover {
+            animation-play-state: paused;
         }
     }
     .skill__wrapper {
+        width: 185px;
         display: flex;
-        justify-content: center;
+        padding-top: 5px;
+        justify-content: space-between;
+        align-items: center;
         gap: 20px;
     }
     .game__menu {
         display: none;
         margin: 0 auto;
+        img {
+            display: block;
+            margin: 0 auto;
+        }
         &__descr {
             margin: 0 auto;
+            margin-top: 10px;
             text-align: center;
             color: antiquewhite;
         }
         &__btn {
-            display: block;
-            margin: 0 auto;
+            margin-top: 10px;
+            img {
+                display: block;
+                margin: 0 auto;
+                &:hover {
+                    cursor: pointer;
+                }
+            }
         }
     }
     .game__skin__item {
@@ -62,4 +111,11 @@
     .skin__selected {
         box-shadow: 0px 0px 6px 2px white;
     }
+}
+
+.start_title {
+    text-align: center;
+    font-size: 30px;
+    margin-top: 20px;
+    color: orange;
 }

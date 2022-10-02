@@ -10,13 +10,11 @@
     &__card {
         width: 100px;
         height: 149px;
-        // background: url('../../img/skin_1/back.png');
         border-radius: 7%;
         transition: all 0.3s;
         &:hover {
             transition: all 0.2s;
             cursor: pointer;
-            // background: url('../../img/skin_1/back1.png');
             scale: 105%;
         }
         &__img {
@@ -27,6 +25,10 @@
     }
     &__win {
         display: none;
+        img {
+            display: block;
+            margin: 0 auto;
+        }
     }
     &__marvel {
         background: url('../../img/skin_1/back.png');

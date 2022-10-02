@@ -1,0 +1,36 @@
+@media (max-width: 1000px) {
+    .play {
+        &__zone {
+            grid-template-columns: repeat(8, 80px);
+            gap: 10px 10px;
+        }
+        &__card {
+            width: 80px;
+            height: 119px;
+        }
+        &__marvel {
+            background-size: 80px 119px;
+            &:hover {
+                background-size: 80px 119px;
+            }    
+        }
+        &__lego {
+            background-size: 80px 119px;
+            &:hover {
+                background-size: 80px 119px;
+            }    
+        }
+        &__harry {
+            background-size: 80px 119px;
+            &:hover {
+                background-size: 80px 119px;
+            }    
+        }
+        &__starwars {
+            background-size: 80px 119px;
+            &:hover {
+                background-size: 80px 119px;
+            }    
+        }
+    }
+}

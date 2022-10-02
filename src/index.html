@@ -7,54 +7,47 @@
     <title>The Game</title>
     <meta name="title" content="Game Memory">
     <meta name="description" content="Игра - память">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.min.css">
 </head>
 <body>
     <header class="header">
-        <div class="container">
-            
-            <div class="header__menu">
-                <div class="game__skin__item skin__selected" data-class="play__marvel" data-source="img/skin_1/"><img src="img/logo_marvel.png" alt="marvel" class="game__skin__logo"></div>
-                <div class="game__skin__item" data-class="play__lego" data-source="img/skin_2/"><img src="img/logo_lego.png" alt="starwars" class="game__skin__logo"></div>
+        <div class="header__menu">
+            <div class="game__skin__item skin__selected" data-class="play__marvel" data-source="img/skin_1/"><img src="img/logo_marvel.png" alt="marvel" class="game__skin__logo"></div>
+            <div class="game__skin__item" data-class="play__lego" data-source="img/skin_2/"><img src="img/logo_lego.png" alt="starwars" class="game__skin__logo"></div>
 
-                <div class="header__menu__wrapper">
-                    <div class="header__menu__title">The Memory!</div>
-                    <div class="header__menu__descr">Выберите уровень сложности: </div>
-                    <div class="skill__wrapper">
-                        <div class="header__menu__level" data-skill="2">EASY</div>
-                        <div class="header__menu__level" data-skill="3">HARD</div>
-                        <button class="header__menu__btn">Play!</button>
-                    </div>
+            <div class="header__menu__wrapper">
+                <div class="header__menu__title"><img src="img/logo_game.svg" alt="logo_game"></div>
+                <div class="skill__wrapper">
+                    <div class="header__menu__level easy" data-skill="2"></div>
+                    <div class="header__menu__level hard" data-skill="3"></div>
+                    <div class="header__menu__btn play"></div>
                 </div>
-
-                <div class="game__skin__item" data-class="play__harry" data-source="img/skin_3/"><img src="img/logo_harry.png" alt="harry" class="game__skin__logo"></div>
-                <div class="game__skin__item" data-class="play__starwars" data-source="img/skin_4/"><img src="img/logo_starwars.png" alt="lego" class="game__skin__logo"></div>
             </div>
 
-            <div class="game__menu">
-                <div class="game__menu__descr">Количество ошибок: 0</div>
-                <button class="game__menu__btn">Restart!</button>
-            </div>
+            <div class="game__skin__item" data-class="play__harry" data-source="img/skin_3/"><img src="img/logo_harry.png" alt="harry" class="game__skin__logo"></div>
+            <div class="game__skin__item" data-class="play__starwars" data-source="img/skin_4/"><img src="img/logo_starwars.png" alt="lego" class="game__skin__logo"></div>
+        </div>
 
+        <div class="game__menu">
+            <img src="img/mistakes.svg" alt="mistakes" class="mistakes">
+            <div class="game__menu__descr">0</div>
+            <div class="game__menu__btn"><img src="img/restart.svg" alt="restart"></div>
         </div>
     </header>
 
-    <section class="play">
-        <div class="container">
-            <div class="play__zone">
+    <div class="start_title">Choose the level of difficulty "EASY" or "HARD"</div>
 
-            </div>
-            <div class="play__win">
-
-            </div>
-        </div>    
-    </section>
-    
-    <footer class="footer">
-        <div class="container">
+    <div class="play">
+        <div class="play__zone">
 
         </div>
-    </footer>
+        <div class="play__win">
+            <img src="img/win.png" alt="win" class="win">
+        </div>
+    </div>
 
     <script src="js/script.js"></script>
 </body>

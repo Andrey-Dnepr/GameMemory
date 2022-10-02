@@ -4,17 +4,37 @@ html {
     scroll-behavior: smooth; //включает плавный скролинг для сайта, когда переходишь по ссылкам на странице к какимто секциям
 }
 
+body {
+    background: url('../img/background.jpeg');
+}
+
 * {
+    font-family: 'Amatic SC', cursive;
     margin: 0;
     padding: 0;
 }
 
-.container {
-    width: 1140px;
-    margin: 0 auto;
+@keyframes playbeat {
+    from { //начальная позиция
+        transform: scale(1); // scale(1) - означает что мы задаем маштаб 1 - равно 100%
+    }
+    30% {                   //что будет происходить на 30% выполнения анимации
+        color: red;
+    }
+    50% {                   // что будет происходить на 50% выполнения анимации
+        transform: scale(1.2);
+        color: red;
+    }
+    80% {                   // что будет происходить на 80% выполнения анимации
+        color: red;
+    }
+    to {  //конечная позиция
+        transform: scale(1);
+        color: black;
+    }
 }
 
 @import 'blocks/header';
 @import 'blocks/play';
 
-// @import 'base/media';   // Чтоб файл медиа (адаптация под разные экраны) работал корректно, его необходимо подключать в стили самым последним
+@import 'base/media';   // Чтоб файл медиа (адаптация под разные экраны) работал корректно, его необходимо подключать в стили самым последним
