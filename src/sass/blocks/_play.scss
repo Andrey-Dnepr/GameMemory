@@ -31,27 +31,27 @@
         }
     }
     &__marvel {
-        background: url('../../img/skin_1/back.png');
+        background: url('../img/skin_1/back.png');
         &:hover {
-            background: url('../../img/skin_1/back1.png');
+            background: url('../img/skin_1/back1.png');
         }    
     }
     &__lego {
-        background: url('../../img/skin_2/back.png');
+        background: url('../img/skin_2/back.png');
         &:hover {
-            background: url('../../img/skin_2/back1.png');
+            background: url('../img/skin_2/back1.png');
         }    
     }
     &__harry {
-        background: url('../../img/skin_3/back.png');
+        background: url('../img/skin_3/back.png');
         &:hover {
-            background: url('../../img/skin_3/back1.png');
+            background: url('../img/skin_3/back1.png');
         }    
     }
     &__starwars {
-        background: url('../../img/skin_4/back.png');
+        background: url('../img/skin_4/back.png');
         &:hover {
-            background: url('../../img/skin_4/back1.png');
+            background: url('../img/skin_4/back1.png');
         }    
     }
 }

@@ -32,10 +32,10 @@
     .easy {
         width: 42.34px;
         height: 15px;
-        background: url('../../img/easy.svg');
+        background: url('../img/easy.svg');
         transition: all 0.3s;
         &:hover {
-            background: url('../../img/easy1.svg');
+            background: url('../img/easy1.svg');
             scale: 105%;
             transition: all 0.3s;
         }
@@ -43,10 +43,10 @@
     .hard {
         width: 52.08px;
         height: 15px;
-        background: url('../../img/hard.svg');
+        background: url('../img/hard.svg');
         transition: all 0.3s;
         &:hover {
-            background: url('../../img/hard1.svg');
+            background: url('../img/hard1.svg');
             scale: 105%;
             transition: all 0.3s;
         }
@@ -55,7 +55,7 @@
         padding-top: 0px;
         width: 43.42px;
         height: 15px;
-        background: url('../../img/play.svg');
+        background: url('../img/play.svg');
         animation-name: playbeat;
         animation-duration: 1.2s;
         animation-timing-function: ease;
